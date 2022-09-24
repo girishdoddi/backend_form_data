@@ -29,8 +29,9 @@ def signup():
 
 
 @app.route("/check", methods=['POST'])
-def check(data):
-    return data
+def check():
+    print(request.args)
+    return {"Working" : "Data"}
 
 
 
