@@ -8,7 +8,7 @@ def hello_world():
     return {"Doddi" : "Girish"}
 
 #signup route
-@app.route("/signup")
+@app.route("/signup", methods=['POST'])
 def signup():
     data = request.form
     emailid = data.get("emailId")
