@@ -30,7 +30,10 @@ def signup():
 
 @app.route("/check", methods=['POST'])
 def check():
+    print("****************")
     print(request.args)
+    print(request.args.get("form"))
+    print("*****************")
     return {"Working" : "Data"}
 
 
