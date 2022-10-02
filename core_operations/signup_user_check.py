@@ -42,6 +42,7 @@ class SignupUser:
 
 
     def verify_otp_from_db(self,form_data):
+        logging.info("Function--> verify_otp_from_db")
         otp = form_data.get("otp", None)
         request_id = form_data.get("request_id", None)
         db = Database().database_response()
