@@ -1,8 +1,11 @@
-import email
+from imp import reload
+import json
+from site import check_enableusersite
+from tabnanny import check
 from flask import Flask, request
 from interface.signup_user import SignUp
 app = Flask(__name__)
-
+from werkzeug.datastructures import ImmutableMultiDict
 @app.route("/")
 def hello_world():
     return {"Doddi" : "Girish"}
@@ -10,31 +13,23 @@ def hello_world():
 #signup route
 @app.route("/signup", methods=['POST'])
 def signup():
-    data = request.form
-    emailid = data.get("emailId")
-    password = data.get("password")
-    user_name = data.get("userName")
-    check_for_exsisting_user = SignUp().check_exsisting_user(emailid)
-    if not check_for_exsisting_user:
-        user_data = {
-            "emailId" : emailid,
-            "password" : password,
-            "user_name" : user_name
-        }
-        SignUp().add_user(user_data)
-        return {"User" : "Signup successfully happend"}
+    data = ImmutableMultiDict(request.form)
+    data.to_dict(flat=False)
+    check_for_exsisting_user = SignUp().verify_user(data)
+    print(check_for_exsisting_user)
+    if check_for_exsisting_user == "Exsisting User":
+        return {"User" :"Already exsist"}
     else:
-        return {"User" : "Already present, Couldn't signup"}
+        return {"request_id" : check_for_exsisting_user}
 
 
-
-@app.route("/check", methods=['POST'])
-def check():
-    print("****************")
-    print(request.data)
-    print(request.args.get("form"))
-    print("*****************")
-    return {"Working" : "Data"}
+@app.route("/verify/otp", methods = ["POST"])
+def verify_otp():
+    data = request.data
+    data = json.loads(data)
+    print(data)
+    resp = SignUp().verify_otp(data)
+    return resp
 
 
 
