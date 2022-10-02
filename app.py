@@ -29,7 +29,8 @@ def verify_otp():
     data = json.loads(data)
     print(data)
     resp = SignUp().verify_otp(data)
-    return resp
+    
+    return {"resp" : resp}
 
 
 
