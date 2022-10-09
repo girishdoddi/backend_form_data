@@ -8,19 +8,17 @@ CORS(app)
 from werkzeug.datastructures import ImmutableMultiDict
 @app.route("/")
 def hello_world():
-    # req = Request.access_control_request_headers
-    # resp = Response.headers["Access-Control-Allow-Origin"] = "*"
     return {"Doddi" : "Girish"},{"Doddi" : "Working"}
 
 
 @app.route("/test1")
-def hello_world():
+def test1():
     # req = Request.access_control_request_headers
     resp = Response.headers["Girish"] = "Doddi"
     return {"Doddi" : "Girish"},resp
 
 @app.route("/test2")
-def hello_world():
+def test2():
     # req = Request.access_control_request_headers
     resp = Response.headers["Girish"] = "Doddi"
     return resp
