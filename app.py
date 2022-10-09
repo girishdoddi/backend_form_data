@@ -14,8 +14,7 @@ def hello_world():
 @app.route("/test1")
 def test1():
     # req = Request.access_control_request_headers
-    resp = Response.headers["Girish"] = "Doddi"
-    return {"Doddi" : "Girish"},resp
+    return {"Doddi" : "Girish"},200, {"NAME" :"DODDI"}
 
 @app.route("/test2")
 def test2():
